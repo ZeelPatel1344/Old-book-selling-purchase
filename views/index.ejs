@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Selling & Perchace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../public/css/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .anii{
+      transition: transform .2s;
+    }
+    .animals:hover{
+
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    .anii:hover {
+  transform: scale(1.021); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+
+    nav {
+     
+  width:  100%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 50px 0;
+  box-shadow: 0px 5px 0px #dedede;
+}
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+nav ul li {
+  display: inline-block;
+}
+nav ul li a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #aaa;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 10px;
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all .5s;
+}
+nav ul li a:hover {
+  color: #555;
+}
+
+
+/* stroke */
+nav.stroke ul li a,
+nav.fill ul li a {
+  position: relative;
+}
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #aaa;
+  height: 1px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}
+  </style>
+  </head>
+<body>
+    
+    <!-- nav bar  -->
+
+    <nav class="stroke navbar navbar-expand-lg bg-body-tertiary" style="font-family:cursive;" >
+      <div class="container-fluid" >
+        <img class="me-3" style="height: 30px;" src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30143401/311-768x591.png" alt="Logo">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+          <ul  class="navbar-nav me-auto mb-2 mb-lg-0 navi">
+            <li  class="nav-item navi "  >
+              <a class="edit nav-link  active navi" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item  "  >
+              <a class="edit nav-link active" href="/sell">Sell</a>
+            </li>
+            <li class="nav-item " >
+              <a class="edit nav-link active" href="/yourbooks">Your Books</a>
+            </li>
+           
+            
+          </ul>
+          <form class="d-flex" role="search">
+          <input class="form-control me-2 " type="text" name="search" id="searchbar" onkeyup="search_animal()" placeholder="Search anything ..." aria-label="Search">
+          
+  
+            <a href="/login"><button style="width: 140px;" type="button" class="btn btn-dark">Login</button></a>
+            <a href="/signup"> <button style="width: 140px; margin-left: 5px;" type="button" class="btn btn-dark">Sign Up</button></a>
+            <!-- <button style="width: 140px; margin-left: 5px;" type="button" class="btn btn-dark">Sign Up</button> -->
+            <!-- <i style="font-size:24px" class="fa m-2">&#xf290;</i> -->
+            <i style="font-size:24px;margin-top: 6px; margin-left: 4px;" class="fa-solid fa-user"></i>
+          </form>
+        </div>
+      </div>
+    </nav>
+  
+  
+      <!-- goes to next part -->
+
+
+        <h3 style="font-family: cursive;" class="m-3">Showing best Books </h3>
+
+
+        <% if(data.length > 0 ){ %>
+          <div  style="font-family: cursive; width: 100%; display: flex;flex-wrap: wrap; flex-direction: row; grid-gap: 60px">
+          <% for(let i=0;i<data.length;i++){ %>
+
+            <div class="row-col-3 card mb-2 animals" style="border-top-right-radius: 10px; width: 340px;  margin-left: 20px; margin-right: 20px;" >
+                <img class="card-img-top br-10 anii"  style="  margin:auto; padding: 5px 40px 0 40px; height: 320px; width: 300px;  " src="images/<%=data[i].bookimage%>" alt="...">
+                <!-- <div></div> -->
+                <div class="card-body">
+                    <h5 class="card-title "> <%= data[i].bookname %></h5>
+                    <p class="card-text"> <%= data[i].dec %></p>
+                    <h5  class="card-title d-inline"> <%= data[i].price %>  </h5>
+                    <h6 class="card-title d-inline text-danger"><del><%= data[i].oprice %> </del></h6>
+                    <h6 class="card-title  text-danger float-end"><%=parseFloat(100-( data[i].price*100)/data[i].oprice).toFixed(2)  %>% discount</h6>
+                  </div>
+                  <a href="/buyy">
+
+                    <button style="border-radius: 6px; width: 100%;" type="button" class="float-end btn btn-dark">Buy</button>
+                  </a>
+                
+              </div>
+              <% }} %>
+            </div>
+
+            <script>
+              // JavaScript code
+
+              function search_animal() {
+              let input = document.getElementById('searchbar').value;
+              input = input.toLowerCase();
+              let x = document.getElementsByClassName('animals');
+
+              for (i = 0; i < x.length; i++) {
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display = "none";
+                }
+                else {
+                x[i].style.display = "animals";
+                }
+              }
+              }
+
+            </script>
+          </body>
+          </html>
